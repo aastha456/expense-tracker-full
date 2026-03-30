@@ -38,6 +38,38 @@ export const login = async (
 
 }
 
+export const logout = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try{
+        const { refreshToken } = req.body;
+        await authService.logout(refreshToken);
+        return successResponse(res, { message: "Logged out successfully"});
 
-// login, logout, generateAccessTokenBasedOnRefreshToken
+    }catch(error){
+        next(error)
+    }
+}
+
+export const refreshToken = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const { refreshToken } = req.body;
+        const response = await authService.generateAccessTokenBasedOnRefreshToken(refreshToken);
+        return successResponse(res, { data: response})
+
+    }
+    catch(error) {
+        next(error)
+
+    }
+}
+
+
+
 

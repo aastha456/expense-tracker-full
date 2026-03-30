@@ -11,7 +11,8 @@ const connectDB = async () => {
 
     }catch(error){
         console.log("Error connecting to DB: ", error);
-        process.exit()
+        // This closes the server. We want to do this because no database, no server makes sense
+        process.exit(1)
 
     }
 }
