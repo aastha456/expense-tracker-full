@@ -22,7 +22,7 @@ export const register = async (data: UserRegisterRequest) => {
 export const login = async (data: UserLoginRequest) => {
     const { email, password} = data;
 
-    const user = await UserModel.findOne({email}).select("+password");
+    const user = await UserModel.findOne({email}).select("password");
     if(!user){
         throw new Error("User not found");
     }

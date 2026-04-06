@@ -1,10 +1,12 @@
+import { AuthenticatedUser } from './../interfaces/user';
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../config";
 import { errorResponse } from "../utils/responseHelper";
 
 export interface UserRequest extends Request {
-    user?: any }
+    user?: AuthenticatedUser;
+}
 
 export const authenticate = (
     req: UserRequest,
@@ -16,7 +18,7 @@ export const authenticate = (
         return errorResponse(res, {
             message: "Authentication token missing"})
         }
-    req.user = jwt.verify(token, config.JWT_SECRET);
+    req.user = jwt.verify(token, config.JWT_SECRET) as AuthenticatedUser;
     next();
 
 }
