@@ -7,6 +7,6 @@ import { authenticate } from "../middlewares/authenticate";
 
 const router  = Router();
 
-router.post("/",authenticate, validateRequestBody(createPermissionSchema), permissionController.create)
+router.post("/",authenticate, validateRequestBody(createPermissionSchema), permissionController.create);
 
 export default router;

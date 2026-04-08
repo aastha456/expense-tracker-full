@@ -7,6 +7,7 @@ export const validateRequestBody = (schema: z.ZodType<any>) => (
     next: NextFunction
 ) => {
     const result = schema.safeParse(req.body);
+    
     if (!result.success){
         return res.status(400).json({
             message: "Validation error",
@@ -30,7 +31,6 @@ export const validateRequestParams  = (schema: z.ZodType<any>) => (
         })
         
     }
-
     return next();
 
 }
@@ -48,6 +48,7 @@ export const validateQueryParams = (schema: z.ZodType<any>) => (
             errors: result.error.flatten()
         })
     }
+    Object.keys(req.query).forEach(key => delete req.query[key]);
     Object.assign(req.query, result.data);
     next();
 }

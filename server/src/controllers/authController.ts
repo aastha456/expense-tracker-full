@@ -14,8 +14,6 @@ export const register = async(
             data: response
         })
 
-        res.status(httpCodes.RESOURCE_CREATED.statusCode).send({});
-
 
     } catch(error){
         next(error)

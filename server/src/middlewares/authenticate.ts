@@ -4,12 +4,12 @@ import jwt from "jsonwebtoken";
 import { config } from "../config";
 import { errorResponse } from "../utils/responseHelper";
 
-export interface UserRequest extends Request {
+export interface AuthRequest extends Request {
     user?: AuthenticatedUser;
 }
 
 export const authenticate = (
-    req: UserRequest,
+    req: AuthRequest,
     res: Response,
     next: NextFunction
 ) => {
