@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 import RoleModel from "../models/RoleModel";
 
 export const register = async (data: UserRegisterRequest) => {
-    const { name, email, password, roles } = data;
+    const { name, email, password} = data;
 
     const existingUser = await UserModel.findOne({email});
     
@@ -17,19 +17,19 @@ export const register = async (data: UserRegisterRequest) => {
         throw new Error("User already exists");
     }
 
-    let roleIds: mongoose.Types.ObjectId [] = [];
+    // let roleIds: mongoose.Types.ObjectId [] = [];
 
-    if(roles && roles.length > 0){
-        const fetchRoles = await RoleModel.find({name: { $in: roles }});
-        roleIds = fetchRoles.map(role => role._id);
+    // if(roles && roles.length > 0){
+    //     const fetchRoles = await RoleModel.find({name: { $in: roles }});
+    //     roleIds = fetchRoles.map(role => role._id);
 
-        if (roleIds.length !== roles.length){
-            throw new Error("One or more roles are invalid");
-        }
-    } 
+    //     if (roleIds.length !== roles.length){
+    //         throw new Error("One or more roles are invalid");
+    //     }
+    // } 
     
     const hashedPassword = await bcrypt.hash(password, NUMBER_OF_SALT_ROUNDS);
-    return await UserModel.create({name, email, password: hashedPassword, roles: roleIds});
+    return await UserModel.create({name, email, password: hashedPassword});
     
 
 }

@@ -15,3 +15,17 @@ export const create = async (
         next(error)
     }
 }
+
+export const getAll = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try{
+        const response = await permissionServices.getAll();
+        return successResponse(res, {data: response});
+
+    } catch(error){
+        next(error)
+    }
+}

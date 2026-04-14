@@ -13,3 +13,7 @@ export const create = async (data: PermissionRequest) => {
     return await PermissionModel.create({name, description})
     
 }
+
+export function getAll() {
+    throw new Error('Function not implemented.');
+}

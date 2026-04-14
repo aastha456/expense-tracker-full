@@ -5,8 +5,13 @@ export const getAll = async () => {
     return await UserModel.find();
 }
 
-export const getById = async (id: string) => {
-    const user = await UserModel.findById(id);
+export const getById = async (userid: string) => {
+    const user = await UserModel.findById(userid).populate({
+        path: "roles",
+        populate: {
+            path: "permissions",
+        }
+    });
     if(!user){
         throw new Error("User not found");
     }

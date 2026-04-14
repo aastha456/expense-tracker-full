@@ -3,7 +3,6 @@ export interface UserRegisterRequest {
     name: string;
     email: string;
     password: string;
-    roles?: string[];  //Optional filed for roles and permissions
 }
 
 export interface UserLoginRequest {
